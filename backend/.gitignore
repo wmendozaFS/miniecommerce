@@ -1,0 +1,22 @@
+# Entorno
+.env
+
+# Base de datos
+*.sqlite
+*.sqlite3
+db/*.sqlite
+node_modules/
+
+# Subidas de archivos
+uploads/
+*.log
+
+# Archivos temporales o del sistema
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Configuraciones personales
+.vscode/
+.idea/
+*.swp
