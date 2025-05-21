@@ -1,16 +1,20 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post('http://localhost:4000/api/auth/login&#39;, { email, password }');
-      localStorage.setItem('token', res.data.token);
-      alert('Login correcto');
+      login(res.data.token);
+      navigate('/');
     } catch (err) {
       alert(err.response?.data?.msg || 'Error al hacer login');
     }
