@@ -9,13 +9,13 @@ export default function Navbar() {
       <Link className="navbar-brand" to="/">Ecommerce</Link>
       <div className="ms-auto">
         <Link className="nav-link d-inline text-light" to="/">Inicio</Link>
-        {!user && <Link className="nav-link d-inline text-light" to="/login">Login </Link>}
+        {!user && <Link className="nav-link d-inline text-light" to="/login">Login</Link>}
         {user?.role === 'admin' && (
           <Link className="nav-link d-inline text-light" to="/admin/categories">Categorías</Link>
         )}
         {user && (
           <>
-            <span className="text-light mx-2">👤 {user.name}</span>
+            <span className="text-light mx-2">{user.name}</span>
             <button className="btn btn-outline-light btn-sm" onClick={logout}>Cerrar sesión</button>
           </>
         )}

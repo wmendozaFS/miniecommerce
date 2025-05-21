@@ -20,34 +20,20 @@ exports.register = async (req, res) => {
 exports.updateRole = async (req, res) => { 
     const userid =req.params.id;
     const {role } = req.body;
-    console.log('Actualizando Role del Usuario:', roles);
+    console.log('Actualizando Role del Usuario:', role);
     if (!role) {
-        return res.status(400).json({ message: 'El role es requerido' });
+        return res.status(400).json({ message: 'El rol es requerido' });
     }
 
     try {
-    const [rows]=await pool.query('UPDATE order_status_history SET status=? WHERE id=?', [status, orderid]);
+    const [rows]=await pool.query('UPDATE users SET role=? WHERE id=?', [role, userid]);
     
     if (rows.affectedRows === 0){
-        return res.status(404).json({msg:"Order no encontrada"})
+        return res.status(404).json({msg:"Usuario no encontrada"})
     }
-    res.status(201).json({ msg: 'Status actualizado correctamente.' });
+    res.status(201).json({ msg: 'Rol actualizado correctamente.' });
   } catch (error) {
-    res.status(500).json({ msg: 'Error al actualizar Status.', error: error.message });
-  }
-};
-exports.register = async (req, res) => {
-  const { name, email, password, role } = req.body;
-  try {
-    const [existing] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
-    if (existing.length > 0) return res.status(400).json({ msg: 'El correo ya está registrado.' });
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    await pool.query('INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)', [name, email, hashedPassword, role]);
-
-    res.json({ msg: 'Usuario registrado correctamente.' });
-  } catch (err) {
-    res.status(500).json({ msg: 'Error interno.', error: err.message });
+    res.status(500).json({ msg: 'Error al actualizar Rol.', error: error.message });
   }
 };
 
