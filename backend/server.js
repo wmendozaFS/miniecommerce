@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config({ path: '../.env' });  // Si .env está un nivel arriba
+require('dotenv').config({ path: './.env' });  // Si .env está un nivel arriba
 
 const app = express();
 app.use(cors());

@@ -3,13 +3,13 @@ const jwt = require('jsonwebtoken');
 const pool = require('../config/db');
 
 exports.register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
   try {
     const [existing] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
     if (existing.length > 0) return res.status(400).json({ msg: 'El correo ya está registrado.' });
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    await pool.query('INSERT INTO users (name, email, password) VALUES (?, ?, ?)', [name, email, hashedPassword]);
+    await pool.query('INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)', [name, email, hashedPassword, role]);
 
     res.json({ msg: 'Usuario registrado correctamente.' });
   } catch (err) {
