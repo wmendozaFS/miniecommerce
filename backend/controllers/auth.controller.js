@@ -17,26 +17,6 @@ exports.register = async (req, res) => {
   }
 };
 
-exports.updateRole = async (req, res) => { 
-    const userid =req.params.id;
-    const {role } = req.body;
-    console.log('Actualizando Role del Usuario:', role);
-    if (!role) {
-        return res.status(400).json({ message: 'El rol es requerido' });
-    }
-
-    try {
-    const [rows]=await pool.query('UPDATE users SET role=? WHERE id=?', [role, userid]);
-    
-    if (rows.affectedRows === 0){
-        return res.status(404).json({msg:"Usuario no encontrada"})
-    }
-    res.status(201).json({ msg: 'Rol actualizado correctamente.' });
-  } catch (error) {
-    res.status(500).json({ msg: 'Error al actualizar Rol.', error: error.message });
-  }
-};
-
 exports.login = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -47,7 +27,7 @@ exports.login = async (req, res) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(401).json({ msg: 'Contraseña incorrecta.' });
 
-    const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
+    const token = jwt.sign({  id: user.id, name: user.name, role: user.role}, process.env.JWT_SECRET, {
       expiresIn: '1d'
     });
 

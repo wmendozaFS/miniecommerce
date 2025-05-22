@@ -6,9 +6,10 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  // Al cargar, lee el token y decodifica el usuario
   useEffect(() => {
     const token = localStorage.getItem('token');
+    console.log('Token:', token); // 👈 temporal para ver si llega
+
     if (token) {
       try {
         const decoded = jwtDecode(token);

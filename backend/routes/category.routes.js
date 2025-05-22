@@ -5,5 +5,8 @@ const { verifyToken } = require('../middleware/auth');
 
 
 router.post('/create', categoryController.createCategory);
-router.get('/', categoryController.getCategories);
+router.get('/list', categoryController.getCategories);
+router.delete('/delete/:id', categoryController.deleteCategory);
+router.put('/update/:id', categoryController.updateCategory);
+router.get('/lista-ordenada', categoryController.listaOrdenadaCategory);
 module.exports = router;

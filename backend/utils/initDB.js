@@ -36,14 +36,15 @@ const mysql = require('mysql2/promise');
       );
 
       CREATE TABLE products (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(100),
-        description TEXT,
-        price DECIMAL(10, 2),
-        stock INT,
-        category_id INT,
-        FOREIGN KEY (category_id) REFERENCES categories(id)
-      );
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  description TEXT,
+  price DECIMAL(10,2) NOT NULL,
+  stock INT NOT NULL,
+  category_id INT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
+);
 
       CREATE TABLE orders (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -73,7 +74,6 @@ const mysql = require('mysql2/promise');
       );
 
       INSERT INTO categories (name) VALUES ('Tecnología'), ('Moda'), ('Hogar');
-      
     `);
 
     console.log('✅ Base de datos miniecommerce creada correctamente.');
