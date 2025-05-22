@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import Admin from './pages/Admin';
 import Categories from './pages/Categories';
 import Products from './pages/Products';
-
+import EstadoPedidos from './pages/Order_Status';
 import Navbar from './components/Navbar';
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/categories" element={<Categories />} />
           <Route path="/admin/products" element={<Products />} />
+          <Route path="/admin/orders" element={<EstadoPedidos />} />
 
         </Routes>
       </div>

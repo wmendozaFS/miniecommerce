@@ -14,13 +14,14 @@ export default function Navbar() {
     <nav className="navbar navbar-expand-lg bg-dark navbar-dark px-4">
       <Link className="navbar-brand" to="/">Ecommerce</Link>
       <div className="ms-auto">
-        <Link className="nav-link d-inline text-light" to="/">Inicio</Link>
-        {!user && <Link className="nav-link d-inline text-light" to="/login">Login</Link>}
+        <Link className="nav-link d-inline text-light" to="/">Inicio </Link>
+        {!user && <Link className="nav-link d-inline text-light" to="/login"> Login </Link>}
         {user?.role === 'admin' && (
           <>
-            <Link className="nav-link d-inline text-light" to="/admin">Admin</Link>
-            <Link className="nav-link d-inline text-light" to="/admin/categories">Categorías</Link>
-            <Link className="nav-link d-inline text-light" to="/admin/products">Productos</Link>
+            <Link className="nav-link d-inline text-light" to="/admin"> Admin </Link>
+            <Link className="nav-link d-inline text-light" to="/admin/categories"> Categorías </Link>
+            <Link className="nav-link d-inline text-light" to="/admin/products"> Productos </Link>
+            <Link className="nav-link d-inline text-light" to="/admin/orders"> Pedidos </Link>
           </>
        )}
         {user && (

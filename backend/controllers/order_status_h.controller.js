@@ -3,7 +3,7 @@ const pool = require('../config/db');
 //Adiciona Status
 exports.createOrderStatusHistory = async (req, res) => { 
     const { order_id, status } = req.body;
-    console.log('Creando Order Status:', name);
+    console.log('Creando Order Status:', order_id);
     if (!order_id) {
         return res.status(400).json({ message: 'El status es requerido' });
     }

@@ -10,20 +10,20 @@ export default function OrderStatus() {
   const itemsPerPage = 5;
   const token = localStorage.getItem('token');
 
-  // Obtener categorías del backend
+  // Obtener Status del backend
   const fetchStatusO = async () => {
     try {
-      const res = await axios.get('http://localhost:4000/api/categories/list');
+      const res = await axios.get('http://localhost:4000/api/orders/list');
       setOrderStatus(res.data);
     } catch (error) {
       console.error('Error al cargar categorías:', error);
     }
   };
 
-  // Crear nueva categoría
+  // Crear nuevo Status
   const handleCreate = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:4000/api/categories/create', { status: newStatus }, {
+    await axios.post('http://localhost:4000/api/orders/create', { status: newStatus }, {
       headers: { Authorization: `Bearer ${token}` }
     });
     setNewStatusO('');
@@ -32,22 +32,22 @@ export default function OrderStatus() {
 
   // Eliminar
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:4000/api/categories/delete/${id}`, {
+    await axios.delete(`http://localhost:4000/api/orders/delete/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
-    fetchCategories();
+    fetchStatusO();
   };
 
   // Actualizar
   const handleUpdate = async (id, status) => {
-    await axios.put(`http://localhost:4000/api/categories/update/${id}`, { status }, {
+    await axios.put(`http://localhost:4000/api/orders/update/${id}`, { status }, {
       headers: { Authorization: `Bearer ${token}` }
     });
-    fetchCategories();
+    fetchStatusO();
   };
 
   useEffect(() => {
-    fetchCategories();
+    fetchStatusO();
   }, []);
 
   // ✅ ORDENAMIENTO
@@ -68,7 +68,7 @@ export default function OrderStatus() {
     <div>
       <h2>Orders Status</h2>
 
-      {/* Crear nueva */}
+      {/* Crear Status */}
       <form onSubmit={handleCreate} className="mb-3">
         <input
           className="form-control mb-2"
@@ -81,7 +81,26 @@ export default function OrderStatus() {
 
       {/* Orden */}
       <div className="d-flex justify-content-between align-items-center mb-2">
-        <strong>Total: {categories.length}</strong>
+        <strong>Total: {statusOrder.length}</strong>
+        
+        {/* <select
+          className="form-select w-auto"
+          value={sort}
+          onChange={(e) => {
+            setSort(e.target.value);
+            setCurrentPage(1);
+          }}
+        >
+          <option value="asc">A-Z</option>
+          <option value="desc">Z-A</option>
+        </select> */}
+      </div>
+      <div className="d-flex justify-content-between align-items-center mb-2">
+        
+          <strong>Pedido ID:</strong>
+          <strong>Estado:</strong>
+          <strong>Fecha Actualizacion:</strong>
+        
         <select
           className="form-select w-auto"
           value={sort}
@@ -98,8 +117,8 @@ export default function OrderStatus() {
       {/* Lista paginada */}
       <ul className="list-group">
         {currentItems.map((cat) => (
-          <li key={cat.id} className="list-group-item d-flex justify-content-between align-items-center">
-            {cat.status}
+          <li key={cat.id} className="d-flex justify-content-between align-items-center mb-2">
+                {cat.order_id} {cat.status} {cat.changed_at}
             <div>
               <button
                 className="btn btn-outline-warning btn-sm me-2"
