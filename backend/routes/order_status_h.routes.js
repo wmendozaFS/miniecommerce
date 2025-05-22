@@ -7,5 +7,5 @@ const orderStatusHController = require('../controllers/order_status_h.controller
 router.post('/create', orderStatusHController.createOrderStatusHistory);
 router.put('/update/:id', orderStatusHController.updateOrderStatusHistory);
 router.delete('/delete/:id', orderStatusHController.deleteOrderStatusHistory);
-router.get('/', orderStatusHController.getOrderStatusHistory);
+router.get('/list', orderStatusHController.getOrderStatusHistory);
 module.exports = router;

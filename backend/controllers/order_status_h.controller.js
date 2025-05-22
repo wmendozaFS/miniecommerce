@@ -1,5 +1,6 @@
 const pool = require('../config/db');
 
+//Adiciona Status
 exports.createOrderStatusHistory = async (req, res) => { 
     const { order_id, status } = req.body;
     console.log('Creando Order Status:', name);
@@ -18,6 +19,7 @@ exports.createOrderStatusHistory = async (req, res) => {
   }
 };
 
+//Actualiza Status
 exports.updateOrderStatusHistory = async (req, res) => { 
     const orderid =req.params.id;
     const {status } = req.body;
@@ -38,6 +40,7 @@ exports.updateOrderStatusHistory = async (req, res) => {
   }
 };
 
+//Borra Status
 exports.deleteOrderStatusHistory = async (req, res) => {
     const orderid =req.params.id;
     try {
@@ -50,7 +53,7 @@ exports.deleteOrderStatusHistory = async (req, res) => {
     res.status(500).json({ msg: 'Error al Eliminar Status.', error: error.message });
     };
 };
-
+//Lista Status
 exports.getOrderStatusHistory = async (req, res) => {
     try {
         const [order_status_history] = await pool.query('SELECT * FROM order_status_history');
